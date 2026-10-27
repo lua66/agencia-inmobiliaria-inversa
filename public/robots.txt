@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Direct access to verification files
+Allow: /google*.html
+Allow: /sitemap.xml
+
+# XML Sitemaps
+Sitemap: https://ais-pre-jrxje44vozm2mzkpvzzmeh-14911313193.europe-west3.run.app/sitemap.xml

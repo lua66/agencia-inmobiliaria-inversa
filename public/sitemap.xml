@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+  
+  <!-- Página Principal / Inicio -->
+  <url>
+    <loc>https://ais-pre-jrxje44vozm2mzkpvzzmeh-14911313193.europe-west3.run.app/</loc>
+    <lastmod>2025-05-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Vender Vivienda & Valoración -->
+  <url>
+    <loc>https://ais-pre-jrxje44vozm2mzkpvzzmeh-14911313193.europe-west3.run.app/vender</loc>
+    <lastmod>2025-05-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Comprar para Reformar -->
+  <url>
+    <loc>https://ais-pre-jrxje44vozm2mzkpvzzmeh-14911313193.europe-west3.run.app/comprar-para-reformar</loc>
+    <lastmod>2025-05-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Calculadora de Valoración y Presupuesto de Reforma -->
+  <url>
+    <loc>https://ais-pre-jrxje44vozm2mzkpvzzmeh-14911313193.europe-west3.run.app/calculadora-presupuesto</loc>
+    <lastmod>2025-05-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Proyectos & Casos de Éxito Antes/Después -->
+  <url>
+    <loc>https://ais-pre-jrxje44vozm2mzkpvzzmeh-14911313193.europe-west3.run.app/proyectos</loc>
+    <lastmod>2025-05-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Red de Profesionales (Arquitectura, Interiorismo, Reformas) -->
+  <url>
+    <loc>https://ais-pre-jrxje44vozm2mzkpvzzmeh-14911313193.europe-west3.run.app/red-profesionales</loc>
+    <lastmod>2025-05-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Sobre Nosotros -->
+  <url>
+    <loc>https://ais-pre-jrxje44vozm2mzkpvzzmeh-14911313193.europe-west3.run.app/nosotros</loc>
+    <lastmod>2025-05-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Contacto & Asesoría -->
+  <url>
+    <loc>https://ais-pre-jrxje44vozm2mzkpvzzmeh-14911313193.europe-west3.run.app/contacto</loc>
+    <lastmod>2025-05-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+</urlset>
