@@ -48,8 +48,8 @@ export const Navbar: React.FC<NavbarProps> = ({
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-white/95 dark:bg-slate-950/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800/80 transition-colors">
-      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 h-18 sm:h-20 flex items-center justify-between gap-2 sm:gap-4 overflow-hidden">
+    <header className="sticky top-0 z-50 w-full bg-white/95 dark:bg-slate-950/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800/80 transition-colors">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 h-18 sm:h-20 flex items-center justify-between gap-2 sm:gap-4">
         
         {/* Brand Lockup / Logo */}
         <button
@@ -108,37 +108,62 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               type="button"
               onClick={() => setLangDropdownOpen(!langDropdownOpen)}
-              className="flex items-center gap-1 px-2 sm:px-2.5 py-1.5 rounded-lg text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-slate-900 hover:bg-slate-200 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 transition-colors uppercase"
+              className="flex items-center gap-1 px-2 sm:px-2.5 py-1.5 rounded-lg text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-slate-900 hover:bg-slate-200 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 transition-colors uppercase shadow-sm"
               aria-label="Seleccionar idioma"
+              aria-expanded={langDropdownOpen}
             >
               <Globe className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400 shrink-0" />
               <span>{lang}</span>
             </button>
 
             {langDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-32 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-xl py-1 z-50">
-                <button
-                  type="button"
-                  onClick={() => { onLanguageChange('es'); setLangDropdownOpen(false); }}
-                  className={`w-full text-left px-3 py-1.5 text-xs ${lang === 'es' ? 'text-sky-600 dark:text-sky-400 font-semibold bg-slate-100 dark:bg-slate-800/60' : 'text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'}`}
-                >
-                  Español (ES)
-                </button>
-                <button
-                  type="button"
-                  onClick={() => { onLanguageChange('ca'); setLangDropdownOpen(false); }}
-                  className={`w-full text-left px-3 py-1.5 text-xs ${lang === 'ca' ? 'text-sky-600 dark:text-sky-400 font-semibold bg-slate-100 dark:bg-slate-800/60' : 'text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'}`}
-                >
-                  Català (CA)
-                </button>
-                <button
-                  type="button"
-                  onClick={() => { onLanguageChange('en'); setLangDropdownOpen(false); }}
-                  className={`w-full text-left px-3 py-1.5 text-xs ${lang === 'en' ? 'text-sky-600 dark:text-sky-400 font-semibold bg-slate-100 dark:bg-slate-800/60' : 'text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'}`}
-                >
-                  English (EN)
-                </button>
-              </div>
+              <>
+                {/* Backdrop to close dropdown when clicking outside */}
+                <div 
+                  className="fixed inset-0 z-40 bg-black/10 dark:bg-black/30 backdrop-blur-[1px]" 
+                  onClick={() => setLangDropdownOpen(false)} 
+                />
+                
+                {/* Floating Dropdown Menu */}
+                <div className="absolute right-0 top-full mt-2 w-36 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-2xl py-1.5 z-50 ring-1 ring-black/5 animate-in fade-in slide-in-from-top-1 duration-150">
+                  <button
+                    type="button"
+                    onClick={() => { onLanguageChange('es'); setLangDropdownOpen(false); }}
+                    className={`w-full flex items-center justify-between px-3 py-2 text-xs transition-colors ${
+                      lang === 'es' 
+                        ? 'text-sky-600 dark:text-sky-400 font-bold bg-sky-50 dark:bg-sky-950/50' 
+                        : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/80'
+                    }`}
+                  >
+                    <span>Español</span>
+                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-500 font-mono">ES</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => { onLanguageChange('ca'); setLangDropdownOpen(false); }}
+                    className={`w-full flex items-center justify-between px-3 py-2 text-xs transition-colors ${
+                      lang === 'ca' 
+                        ? 'text-sky-600 dark:text-sky-400 font-bold bg-sky-50 dark:bg-sky-950/50' 
+                        : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/80'
+                    }`}
+                  >
+                    <span>Català</span>
+                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-500 font-mono">CA</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => { onLanguageChange('en'); setLangDropdownOpen(false); }}
+                    className={`w-full flex items-center justify-between px-3 py-2 text-xs transition-colors ${
+                      lang === 'en' 
+                        ? 'text-sky-600 dark:text-sky-400 font-bold bg-sky-50 dark:bg-sky-950/50' 
+                        : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/80'
+                    }`}
+                  >
+                    <span>English</span>
+                    <span className="text-[10px] px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-500 font-mono">EN</span>
+                  </button>
+                </div>
+              </>
             )}
           </div>
 
