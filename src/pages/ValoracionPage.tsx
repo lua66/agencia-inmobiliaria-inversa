@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { StrategicCTAButton, StrategicActionType } from '../components/StrategicCTAButton';
 import { ValueCalculator } from '../components/ValueCalculator';
+import { PropertyValuationCalculator } from '../components/PropertyValuationCalculator';
 import { useRouter } from '../router/RouterContext';
 
 interface ValoracionPageProps {
@@ -75,17 +76,19 @@ export const ValoracionPage: React.FC<ValoracionPageProps> = ({ onOpenActionModa
         </p>
       </section>
 
-      {/* Interactive PRESTO Calculator Embed */}
+      {/* Interactive Spanish Property Valuation Calculator */}
       <section className="space-y-6">
         <div className="max-w-2xl">
           <h2 className="text-xl sm:text-2xl font-bold font-serif text-slate-900 dark:text-white">
-            Calcula el Potencial Orientativo de tu Inmueble
+            Calculadora de Valoración de Vivienda en Toda España
           </h2>
           <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
-            Simula diferentes niveles de intervención: desde estilismo inmobiliario hasta reforma integral de alta eficiencia energética.
+            Selecciona tu provincia, tipología, estado de la vivienda y superficie para obtener el valor estimado de mercado y el potencial con transformación.
           </p>
         </div>
-        <ValueCalculator lang="es" onOpenActionModal={onOpenActionModal} />
+        <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl">
+          <PropertyValuationCalculator lang="es" />
+        </div>
       </section>
 
       {/* 4 Pillars of our In Situ Valuation */}
