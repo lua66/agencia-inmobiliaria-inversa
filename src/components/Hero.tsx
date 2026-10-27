@@ -24,7 +24,7 @@ export const Hero: React.FC<HeroProps> = ({
       {/* Background Architectural Canvas with subtle gradient overlay */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/src/assets/images/hero_architectural_penthouse_1790762421218.jpg"
+          src="/images/hero_architectural_penthouse_1790762421218.jpg"
           alt="Transformación arquitectónica inmobiliaria de alta gama"
           referrerPolicy="no-referrer"
           className="w-full h-full object-cover object-center brightness-[0.92] dark:brightness-[0.30] contrast-[1.05] dark:contrast-[1.08] scale-105 transform duration-1000 ease-out transition-all"

@@ -48,7 +48,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white/95 dark:bg-slate-950/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800/80 transition-colors">
+    <header className="sticky top-0 z-[100] w-full bg-white/95 dark:bg-slate-950/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800/80 transition-colors">
       <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 h-18 sm:h-20 flex items-center justify-between gap-2 sm:gap-4">
         
         {/* Brand Lockup / Logo */}
@@ -120,12 +120,12 @@ export const Navbar: React.FC<NavbarProps> = ({
               <>
                 {/* Backdrop to close dropdown when clicking outside */}
                 <div 
-                  className="fixed inset-0 z-40 bg-black/10 dark:bg-black/30 backdrop-blur-[1px]" 
+                  className="fixed inset-0 z-[105] bg-black/10 dark:bg-black/30 backdrop-blur-[1px]" 
                   onClick={() => setLangDropdownOpen(false)} 
                 />
                 
                 {/* Floating Dropdown Menu */}
-                <div className="absolute right-0 top-full mt-2 w-36 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-2xl py-1.5 z-50 ring-1 ring-black/5 animate-in fade-in slide-in-from-top-1 duration-150">
+                <div className="absolute right-0 top-full mt-2 w-36 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-2xl py-1.5 z-[110] ring-1 ring-black/5 animate-in fade-in slide-in-from-top-1 duration-150">
                   <button
                     type="button"
                     onClick={() => { onLanguageChange('es'); setLangDropdownOpen(false); }}

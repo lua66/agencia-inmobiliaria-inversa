@@ -55,7 +55,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({
           <div className="lg:col-span-5 relative">
             <div className="relative rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-xl">
               <img
-                src="/src/assets/images/building_facade_restoration_1790762473893.jpg"
+                src="/images/building_facade_restoration_1790762473893.jpg"
                 alt="Rehabilitación arquitectónica integral"
                 referrerPolicy="no-referrer"
                 className="w-full h-80 object-cover"

@@ -6,8 +6,8 @@ export const transformationCases: TransformationCase[] = [
     title: 'Reforma Integral & Redistribución · Ático Pau Claris',
     location: 'Eixample Dret, Barcelona',
     category: 'integral',
-    beforeImage: '/src/assets/images/living_room_before_renovation_1790762437182.jpg',
-    afterImage: '/src/assets/images/living_room_after_renovation_1790762450162.jpg',
+    beforeImage: '/images/living_room_before_renovation_1790762437182.jpg',
+    afterImage: '/images/living_room_after_renovation_1790762450162.jpg',
     originalPrice: 420000,
     renovationCost: 78650, // 65.000 € base + 21% IVA = 78.650 €
     finalMarketValue: 610000,
@@ -23,8 +23,8 @@ export const transformationCases: TransformationCase[] = [
     title: 'Transformación Cocina Gourmet & Zona Social · Recoletos',
     location: 'Barrio de Salamanca, Madrid',
     category: 'cocina',
-    beforeImage: '/src/assets/images/living_room_before_renovation_1790762437182.jpg',
-    afterImage: '/src/assets/images/kitchen_luxury_transformation_1790762461387.jpg',
+    beforeImage: '/images/kitchen_before_renovation.jpg',
+    afterImage: '/images/kitchen_luxury_transformation_1790762461387.jpg',
     originalPrice: 610000,
     renovationCost: 48400, // 40.000 € base + 21% IVA
     finalMarketValue: 745000,
@@ -40,8 +40,8 @@ export const transformationCases: TransformationCase[] = [
     title: 'Rehabilitación Integral de Edificio & Fachada · Gran Vía',
     location: 'Valencia Centro',
     category: 'fachada',
-    beforeImage: '/src/assets/images/living_room_before_renovation_1790762437182.jpg',
-    afterImage: '/src/assets/images/building_facade_restoration_1790762473893.jpg',
+    beforeImage: '/images/building_facade_before.jpg',
+    afterImage: '/images/building_facade_restoration_1790762473893.jpg',
     originalPrice: 780000,
     renovationCost: 111320, // 92.000 € base + 21% IVA
     finalMarketValue: 1060000,
@@ -67,7 +67,7 @@ export const opportunitiesList: OpportunityProperty[] = [
     rooms: 3,
     baths: 2,
     potentialScore: 9.6,
-    image: '/src/assets/images/living_room_after_renovation_1790762450162.jpg',
+    image: '/images/living_room_after_renovation_1790762450162.jpg',
     transformationConcept: 'Espacio diáfano con suite principal, cocina abierta con isla y vestidor a medida. Estimación s/ baremos PRESTO.',
     viableRenovations: ['Redistribución en suite', 'Climatización por conductos', 'Suelo continuo de microcemento o roble'],
     tags: ['Estimación PRESTO + IVA', 'Visita Técnica Necesaria', 'Finca Regia']
@@ -84,7 +84,7 @@ export const opportunitiesList: OpportunityProperty[] = [
     rooms: 3,
     baths: 2,
     potentialScore: 9.8,
-    image: '/src/assets/images/hero_architectural_penthouse_1790762421218.jpg',
+    image: '/images/hero_architectural_penthouse_1790762421218.jpg',
     transformationConcept: 'Fusión de terraza exterior con salón mediante cerramientos de vidrio plegable sin perfiles. Sujeto a visita in situ.',
     viableRenovations: ['Apertura total a terraza', 'Cocina abierta premium', 'Domótica integral'],
     tags: ['Terraza 35m²', 'Normativa PRESTO', 'Gran Margen de Ganancia']
@@ -101,7 +101,7 @@ export const opportunitiesList: OpportunityProperty[] = [
     rooms: 2,
     baths: 2,
     potentialScore: 9.2,
-    image: '/src/assets/images/kitchen_luxury_transformation_1790762461387.jpg',
+    image: '/images/kitchen_luxury_transformation_1790762461387.jpg',
     transformationConcept: 'Restauración de mosaico hidráulico original combinado con interiorismo contemporáneo e instalaciones nuevas.',
     viableRenovations: ['Recuperación hidráulica', 'Baños integrados de microcemento', 'Cocina de diseño'],
     tags: ['Carácter Histórico', 'Precios Oficiales PRESTO', 'Alta Rentabilidad']
