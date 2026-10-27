@@ -217,32 +217,5 @@ export const mockProjectMilestones: ProjectMilestone[] = [
   }
 ];
 
-export const mockNotifications: NotificationItem[] = [
-  {
-    id: 'notif-1',
-    title: 'Nuevo avance fotográfico publicado',
-    message: 'El director de obra ha subido 8 nuevas fotos de la fase de suelos en tu proyecto de Pau Claris.',
-    timestamp: 'Hace 2 horas',
-    priority: 'high',
-    read: false,
-    category: 'project'
-  },
-  {
-    id: 'notif-2',
-    title: 'Informe de tasación e inspección in situ listo',
-    message: 'Tu estudio de mercado con medición de partidas PRESTO e IVA desglosado ya está disponible.',
-    timestamp: 'Ayer',
-    priority: 'medium',
-    read: false,
-    category: 'valuation'
-  },
-  {
-    id: 'notif-3',
-    title: 'Presupuesto cerrado PRESTO verificado',
-    message: 'El arquitecto ha validado la partida de climatización con presupuesto cerrado vinculante.',
-    timestamp: 'Hace 3 días',
-    priority: 'info',
-    read: true,
-    category: 'budget'
-  }
-];
+export const mockNotifications: NotificationItem[] = [];
+

@@ -3,6 +3,7 @@ import { Breadcrumbs } from '../components/Breadcrumbs';
 import { StrategicCTAButton, StrategicActionType } from '../components/StrategicCTAButton';
 import { Language } from '../types';
 import { MapPin, Phone, Mail, Clock, ShieldCheck, CheckCircle2, MessageSquare, Send } from 'lucide-react';
+import { crmService } from '../data/crmService';
 
 interface ContactPageProps {
   lang: Language;
@@ -25,6 +26,26 @@ export const ContactPage: React.FC<ContactPageProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    const isSeller = contactForm.interest === 'vender' || contactForm.interest === 'reforma';
+
+    crmService.saveLead({
+      clientType: isSeller ? 'vendedor' : 'comprador',
+      name: contactForm.name,
+      phone: contactForm.phone,
+      email: contactForm.email,
+      city: contactForm.city,
+      serviceInterest: contactForm.interest === 'vender' 
+        ? 'Venta de vivienda & Asesoría técnica' 
+        : contactForm.interest === 'comprar' 
+        ? 'Búsqueda para comprar y transformar' 
+        : 'Reforma y rehabilitación técnica',
+      source: 'Página de Contacto Web',
+      message: contactForm.message,
+      prestoAcknowledged: true,
+      initialNote: `Formulario de contacto recibido vía web. Interés: ${contactForm.interest.toUpperCase()}`
+    });
+
     setSubmitted(true);
   };
 

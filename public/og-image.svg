@@ -1,0 +1,169 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <!-- Background Gradients -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#030712"/>
+      <stop offset="50%" stop-color="#081426"/>
+      <stop offset="100%" stop-color="#020d1c"/>
+    </linearGradient>
+    <radialGradient id="cyanGlow" cx="20%" cy="30%" r="50%">
+      <stop offset="0%" stop-color="#0284c7" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#0284c7" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="blueGlow" cx="85%" cy="70%" r="60%">
+      <stop offset="0%" stop-color="#2563eb" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#2563eb" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Card Background Gradient -->
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#1e293b" stop-opacity="0.4"/>
+    </linearGradient>
+
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#60a5fa"/>
+    </linearGradient>
+
+    <filter id="subtleGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+  <rect width="1200" height="630" fill="url(#cyanGlow)"/>
+  <rect width="1200" height="630" fill="url(#blueGlow)"/>
+
+  <!-- Elegant Architectural Grid Lines in background -->
+  <g opacity="0.08" stroke="#38bdf8" stroke-width="1">
+    <line x1="0" y1="100" x2="1200" y2="100" />
+    <line x1="0" y1="200" x2="1200" y2="200" />
+    <line x1="0" y1="300" x2="1200" y2="300" />
+    <line x1="0" y1="400" x2="1200" y2="400" />
+    <line x1="0" y1="500" x2="1200" y2="500" />
+    <line x1="150" y1="0" x2="150" y2="630" />
+    <line x1="300" y1="0" x2="300" y2="630" />
+    <line x1="600" y1="0" x2="600" y2="630" />
+    <line x1="900" y1="0" x2="900" y2="630" />
+    <line x1="1050" y1="0" x2="1050" y2="630" />
+  </g>
+
+  <!-- Decorative Outer Border -->
+  <rect x="24" y="24" width="1152" height="582" rx="20" fill="none" stroke="#38bdf8" stroke-opacity="0.25" stroke-width="1.5"/>
+
+  <!-- Top Badge: Concept Tag -->
+  <g transform="translate(80, 70)">
+    <rect width="450" height="38" rx="8" fill="#0369a1" fill-opacity="0.25" stroke="#38bdf8" stroke-opacity="0.4" stroke-width="1"/>
+    <circle cx="20" cy="19" r="5" fill="#38bdf8"/>
+    <text x="36" y="24" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="13" font-weight="700" fill="#38bdf8" letter-spacing="0.15em">
+      INMOBILIARIA + TRANSFORMACIÓN DE VIVIENDAS
+    </text>
+  </g>
+
+  <!-- BRAND LOGO SECTION (Left side) -->
+  <g transform="translate(80, 135)">
+    <!-- Buildings Icon Graphic scaled -->
+    <g transform="translate(0, 5) scale(1.6)" filter="url(#subtleGlow)">
+      <!-- Background buildings -->
+      <path d="M42 35 L42 75 L52 75 L52 35 Z" fill="#0284c7" opacity="0.85" />
+      <path d="M68 25 L68 75 L78 75 L78 25 Z" fill="#0369a1" />
+      <path d="M30 48 L30 75 L40 75 L40 48 Z" fill="#38bdf8" />
+      
+      <!-- Center tall buildings -->
+      <path d="M55 12 L65 5 L65 75 L55 75 Z" fill="#0284c7" />
+      <path d="M45 22 L55 15 L55 75 L45 75 Z" fill="#2563eb" />
+      <path d="M80 42 L90 50 L90 75 L80 75 Z" fill="#0284c7" />
+
+      <!-- Windows grid lines (Bright White) -->
+      <line x1="47" y1="30" x2="53" y2="30" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" />
+      <line x1="47" y1="40" x2="53" y2="40" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" />
+      <line x1="47" y1="50" x2="53" y2="50" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" />
+      <line x1="47" y1="60" x2="53" y2="60" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" />
+      
+      <line x1="58" y1="20" x2="63" y2="20" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" />
+      <line x1="58" y1="30" x2="63" y2="30" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" />
+      <line x1="58" y1="40" x2="63" y2="40" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" />
+      <line x1="58" y1="50" x2="63" y2="50" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" />
+      <line x1="58" y1="60" x2="63" y2="60" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" />
+
+      <!-- Base stylized ocean / foundation waves -->
+      <path d="M14 78 C35 70, 56 86, 76 76 C92 68, 105 82, 110 78" stroke="#38bdf8" stroke-width="3.8" stroke-linecap="round" fill="none" />
+      <path d="M20 86 C40 78, 64 94, 84 84 C96 77, 104 88, 108 85" stroke="#1d4ed8" stroke-width="3.2" stroke-linecap="round" fill="none" />
+    </g>
+
+    <!-- Brand Typography beside building -->
+    <g transform="translate(210, 20)">
+      <text x="0" y="44" font-family="'Cinzel', Georgia, serif" font-size="46" font-weight="800" fill="#ffffff" letter-spacing="0.18em">AGENCIA</text>
+      <text x="2" y="80" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="24" font-weight="700" fill="#38bdf8" letter-spacing="0.26em">INMOBILIARIA</text>
+      <text x="0" y="128" font-family="'Cinzel', Georgia, serif" font-size="48" font-weight="800" fill="#00b4d8" letter-spacing="0.18em">INVERSA</text>
+    </g>
+  </g>
+
+  <!-- MAIN HEADLINE -->
+  <g transform="translate(80, 340)">
+    <text x="0" y="0" font-family="'Cinzel', Georgia, serif" font-size="38" font-weight="700" fill="#ffffff">
+      No solo vendemos viviendas.
+    </text>
+    <text x="0" y="52" font-family="'Cinzel', Georgia, serif" font-size="40" font-weight="800" fill="url(#textGrad)">
+      Transformamos su valor.
+    </text>
+    <text x="0" y="98" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="20" font-weight="400" fill="#94a3b8">
+      Vende mejor · Compra con visión · Transforma tu vivienda
+    </text>
+  </g>
+
+  <!-- RIGHT SIDE: 3 STAGES PILL CARDS (Antes · Durante · Después) -->
+  <g transform="translate(730, 95)">
+    <!-- Stage 1: ANTES -->
+    <rect x="0" y="0" width="390" height="110" rx="14" fill="url(#cardGrad)" stroke="#38bdf8" stroke-opacity="0.2" stroke-width="1.2"/>
+    <rect x="18" y="18" width="76" height="28" rx="6" fill="#0284c7" fill-opacity="0.3"/>
+    <text x="56" y="37" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="800" fill="#38bdf8" text-anchor="middle">ANTES</text>
+    <text x="108" y="38" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="17" font-weight="700" fill="#ffffff">Análisis &amp; Potencial</text>
+    <text x="22" y="74" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="13" font-weight="400" fill="#cbd5e1">
+      Detección de mejoras, rehabilitación y revalorización
+    </text>
+
+    <!-- Stage 2: DURANTE -->
+    <rect x="0" y="130" width="390" height="110" rx="14" fill="url(#cardGrad)" stroke="#38bdf8" stroke-opacity="0.3" stroke-width="1.2"/>
+    <rect x="18" y="148" width="84" height="28" rx="6" fill="#2563eb" fill-opacity="0.35"/>
+    <text x="60" y="167" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="800" fill="#60a5fa" text-anchor="middle">DURANTE</text>
+    <text x="116" y="168" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="17" font-weight="700" fill="#ffffff">Comercialización &amp; Filtro</text>
+    <text x="22" y="204" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="13" font-weight="400" fill="#cbd5e1">
+      Búsqueda activa, negociación y compraventa segura
+    </text>
+
+    <!-- Stage 3: DESPUÉS -->
+    <rect x="0" y="260" width="390" height="110" rx="14" fill="url(#cardGrad)" stroke="#38bdf8" stroke-opacity="0.2" stroke-width="1.2"/>
+    <rect x="18" y="278" width="86" height="28" rx="6" fill="#059669" fill-opacity="0.3"/>
+    <text x="61" y="297" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="12" font-weight="800" fill="#34d399" text-anchor="middle">DESPUÉS</text>
+    <text x="118" y="298" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="17" font-weight="700" fill="#ffffff">Reforma &amp; Seguimiento</text>
+    <text x="22" y="334" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="13" font-weight="400" fill="#cbd5e1">
+      Red de profesionales, coordinación de obra y entrega
+    </text>
+  </g>
+
+  <!-- BOTTOM BAR / FOOTER -->
+  <g transform="translate(80, 550)">
+    <line x1="0" y1="0" x2="1040" y2="0" stroke="#334155" stroke-opacity="0.6" stroke-width="1"/>
+    
+    <!-- Experience badge -->
+    <g transform="translate(0, 18)">
+      <circle cx="8" cy="8" r="4" fill="#38bdf8"/>
+      <text x="22" y="13" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="14" font-weight="600" fill="#94a3b8">
+        Más de 10 años acompañando a compradores y vendedores · Normativa Presto
+      </text>
+    </g>
+
+    <!-- CTAs Highlight -->
+    <g transform="translate(740, 10)">
+      <rect x="0" y="0" width="145" height="32" rx="6" fill="#0284c7" fill-opacity="0.2" stroke="#0284c7" stroke-width="1"/>
+      <text x="72" y="20" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" font-weight="700" fill="#38bdf8" text-anchor="middle">VALORA TU VIVIENDA</text>
+
+      <rect x="155" y="0" width="145" height="32" rx="6" fill="#38bdf8" fill-opacity="0.15" stroke="#38bdf8" stroke-width="1"/>
+      <text x="227" y="20" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" font-weight="700" fill="#e0f2fe" text-anchor="middle">PIDE UNA CITA</text>
+    </g>
+  </g>
+</svg>

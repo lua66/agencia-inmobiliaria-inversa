@@ -8,12 +8,21 @@ import { BuyerPage } from './pages/BuyerPage';
 import { ProjectsPage } from './pages/ProjectsPage';
 import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
+import { ValoracionPage } from './pages/ValoracionPage';
+import { VenderConReformaPage } from './pages/VenderConReformaPage';
+import { VenderSinReformaPage } from './pages/VenderSinReformaPage';
+import { ComprarParaReformarPage } from './pages/ComprarParaReformarPage';
+import { InformeTecnicoPreCompraPage } from './pages/InformeTecnicoPreCompraPage';
+import { CalculadoraPrestoPage } from './pages/CalculadoraPrestoPage';
+import { LegalPage } from './pages/LegalPage';
 import { ConversionModal } from './components/ConversionModal';
 import { PersonalAreaModal } from './components/PersonalAreaModal';
 import { NotificationsDrawer } from './components/NotificationsDrawer';
+import { AgentLoginModal } from './components/AgentLoginModal';
+import { AgentCrmModal } from './components/AgentCrmModal';
 import { StrategicActionType } from './components/StrategicCTAButton';
 import { Language, Theme, NotificationItem } from './types';
-import { mockNotifications } from './data/mockData';
+
 
 function AppContent() {
   const [lang, setLang] = useState<Language>('es');
@@ -26,8 +35,19 @@ function AppContent() {
   const [personalAreaOpen, setPersonalAreaOpen] = useState<boolean>(false);
   const [notificationsOpen, setNotificationsOpen] = useState<boolean>(false);
 
-  // Notifications
-  const [notifications, setNotifications] = useState<NotificationItem[]>(mockNotifications);
+  // Agent Exclusive CRM Security State
+  const [agentLoginOpen, setAgentLoginOpen] = useState<boolean>(false);
+  const [agentCrmOpen, setAgentCrmOpen] = useState<boolean>(false);
+  const [isAgentAuthenticated, setIsAgentAuthenticated] = useState<boolean>(() => {
+    try {
+      return sessionStorage.getItem('inversa_agent_auth') === 'true';
+    } catch {
+      return false;
+    }
+  });
+
+  // Notifications: start clean with 0 unread alerts
+  const [notifications, setNotifications] = useState<NotificationItem[]>([]);
 
   // Handle Dark / Light mode class on document element
   useEffect(() => {
@@ -46,6 +66,31 @@ function AppContent() {
   const handleOpenActionModal = (type: StrategicActionType) => {
     setConversionActionType(type);
     setConversionModalOpen(true);
+  };
+
+  const handleOpenAgentCrm = () => {
+    if (isAgentAuthenticated) {
+      setAgentCrmOpen(true);
+    } else {
+      setAgentLoginOpen(true);
+    }
+  };
+
+  const handleAgentLoginSuccess = () => {
+    setIsAgentAuthenticated(true);
+    try {
+      sessionStorage.setItem('inversa_agent_auth', 'true');
+    } catch {}
+    setAgentLoginOpen(false);
+    setAgentCrmOpen(true);
+  };
+
+  const handleAgentLogout = () => {
+    setIsAgentAuthenticated(false);
+    try {
+      sessionStorage.removeItem('inversa_agent_auth');
+    } catch {}
+    setAgentCrmOpen(false);
   };
 
   const handleMarkAsRead = (id: string) => {
@@ -72,6 +117,7 @@ function AppContent() {
           onToggleTheme={handleToggleTheme}
           onOpenPersonalArea={() => setPersonalAreaOpen(true)}
           onOpenNotifications={() => setNotificationsOpen(true)}
+          onOpenAgentCrm={handleOpenAgentCrm}
           unreadNotificationsCount={unreadCount}
         />
 
@@ -118,6 +164,54 @@ function AppContent() {
               onOpenActionModal={handleOpenActionModal}
             />
           )}
+
+          {currentPath === '/valoracion-inmobiliaria' && (
+            <ValoracionPage
+              onOpenActionModal={handleOpenActionModal}
+            />
+          )}
+
+          {currentPath === '/vender-con-reforma' && (
+            <VenderConReformaPage
+              onOpenActionModal={handleOpenActionModal}
+            />
+          )}
+
+          {currentPath === '/vender-sin-reforma' && (
+            <VenderSinReformaPage
+              onOpenActionModal={handleOpenActionModal}
+            />
+          )}
+
+          {currentPath === '/comprar-para-reformar' && (
+            <ComprarParaReformarPage
+              onOpenActionModal={handleOpenActionModal}
+            />
+          )}
+
+          {currentPath === '/informe-tecnico-pre-compra' && (
+            <InformeTecnicoPreCompraPage
+              onOpenActionModal={handleOpenActionModal}
+            />
+          )}
+
+          {currentPath === '/calculadora-reforma-presto' && (
+            <CalculadoraPrestoPage
+              onOpenActionModal={handleOpenActionModal}
+            />
+          )}
+
+          {currentPath === '/aviso-legal' && (
+            <LegalPage type="aviso-legal" />
+          )}
+
+          {currentPath === '/politica-privacidad' && (
+            <LegalPage type="politica-privacidad" />
+          )}
+
+          {currentPath === '/politica-cookies' && (
+            <LegalPage type="politica-cookies" />
+          )}
         </main>
       </div>
 
@@ -125,6 +219,7 @@ function AppContent() {
       <Footer
         lang={lang}
         onOpenActionModal={handleOpenActionModal}
+        onOpenAgentCrm={handleOpenAgentCrm}
       />
 
       {/* Strategic Conversion Modal */}
@@ -150,6 +245,20 @@ function AppContent() {
         notifications={notifications}
         onMarkAsRead={handleMarkAsRead}
         onMarkAllAsRead={handleMarkAllAsRead}
+      />
+
+      {/* Agent Exclusive Login Modal (Password / PIN) */}
+      <AgentLoginModal
+        isOpen={agentLoginOpen}
+        onClose={() => setAgentLoginOpen(false)}
+        onSuccess={handleAgentLoginSuccess}
+      />
+
+      {/* Agent Exclusive CRM Modal (Separating Vendedores & Compradores) */}
+      <AgentCrmModal
+        isOpen={agentCrmOpen}
+        onClose={() => setAgentCrmOpen(false)}
+        onLogout={handleAgentLogout}
       />
 
     </div>

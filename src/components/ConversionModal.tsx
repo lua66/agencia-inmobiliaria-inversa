@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
-import { X, CheckCircle2, Clock, Sparkles, Building2, Calendar, AlertTriangle } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { X, CheckCircle2, Clock, Sparkles, Building2, Calendar, AlertTriangle, Home } from 'lucide-react';
 import { StrategicActionType } from './StrategicCTAButton';
 import { translations } from '../locales/translations';
 import { Language } from '../types';
+import { ClientType } from '../types/crm';
+import { crmService } from '../data/crmService';
 
 interface ConversionModalProps {
   isOpen: boolean;
@@ -18,6 +20,7 @@ export const ConversionModal: React.FC<ConversionModalProps> = ({
   lang
 }) => {
   const [submitted, setSubmitted] = useState(false);
+  const [clientType, setClientType] = useState<ClientType>(actionType === 'valuation' ? 'vendedor' : 'comprador');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -27,6 +30,10 @@ export const ConversionModal: React.FC<ConversionModalProps> = ({
     message: ''
   });
 
+  useEffect(() => {
+    setClientType(actionType === 'valuation' ? 'vendedor' : 'comprador');
+  }, [actionType]);
+
   const t = translations[lang].modal;
   const isValuation = actionType === 'valuation';
 
@@ -34,6 +41,24 @@ export const ConversionModal: React.FC<ConversionModalProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Persist lead directly into CRM
+    crmService.saveLead({
+      clientType,
+      name: formData.name,
+      phone: formData.phone,
+      email: formData.email,
+      address: formData.address,
+      city: formData.address.includes('Madrid') ? 'Madrid' : formData.address.includes('Valencia') ? 'Valencia' : 'Barcelona',
+      serviceInterest: isValuation 
+        ? 'Valoración y Visita Técnica In Situ (PRESTO)' 
+        : (clientType === 'vendedor' ? 'Asesoría Venta & Reforma Previa' : 'Asesoría Compra & Transformación'),
+      source: isValuation ? 'Modal Valoración Técnica In Situ' : 'Modal Cita Asesoría Inmobiliaria Inversa',
+      message: formData.message,
+      prestoAcknowledged: true,
+      initialNote: `Solicitud web de ${clientType === 'vendedor' ? 'PROPIETARIO / VENDEDOR' : 'COMPRADOR / INVERSOR'}. Dirección: ${formData.address}`
+    });
+
     setSubmitted(true);
   };
 
@@ -122,6 +147,40 @@ export const ConversionModal: React.FC<ConversionModalProps> = ({
                 <span>
                   {t.placeholderNotice}
                 </span>
+              </div>
+
+              {/* Client Type Selector */}
+              <div>
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+                  ¿Cuál es tu perfil? *
+                </label>
+                <div className="grid grid-cols-2 gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setClientType('vendedor')}
+                    className={`py-2 px-3 rounded-xl border text-xs font-bold flex items-center justify-center gap-1.5 transition-all ${
+                      clientType === 'vendedor'
+                        ? 'bg-amber-500/15 border-amber-500 text-amber-700 dark:text-amber-300 ring-1 ring-amber-500'
+                        : 'bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400'
+                    }`}
+                  >
+                    <Home className="w-3.5 h-3.5" />
+                    <span>Quiero Vender (Propietario)</span>
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={() => setClientType('comprador')}
+                    className={`py-2 px-3 rounded-xl border text-xs font-bold flex items-center justify-center gap-1.5 transition-all ${
+                      clientType === 'comprador'
+                        ? 'bg-sky-500/15 border-sky-500 text-sky-700 dark:text-sky-300 ring-1 ring-sky-500'
+                        : 'bg-slate-50 dark:bg-slate-950 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400'
+                    }`}
+                  >
+                    <Building2 className="w-3.5 h-3.5" />
+                    <span>Quiero Comprar (Comprador)</span>
+                  </button>
+                </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">

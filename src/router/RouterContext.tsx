@@ -1,6 +1,21 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
-export type PageRoute = '/' | '/vender' | '/comprar' | '/proyectos' | '/nosotros' | '/contacto';
+export type PageRoute = 
+  | '/' 
+  | '/vender' 
+  | '/comprar' 
+  | '/proyectos' 
+  | '/nosotros' 
+  | '/contacto'
+  | '/valoracion-inmobiliaria'
+  | '/vender-con-reforma'
+  | '/vender-sin-reforma'
+  | '/comprar-para-reformar'
+  | '/informe-tecnico-pre-compra'
+  | '/calculadora-reforma-presto'
+  | '/aviso-legal'
+  | '/politica-privacidad'
+  | '/politica-cookies';
 
 interface RouterContextType {
   currentPath: PageRoute;
@@ -15,11 +30,20 @@ const RouterContext = createContext<RouterContextType>({
 // Helper to normalize path from window.location
 function normalizePath(pathname: string): PageRoute {
   const clean = pathname.toLowerCase().replace(/\/$/, '') || '/';
-  if (clean === '/vender' || clean.startsWith('/vender')) return '/vender';
-  if (clean === '/comprar' || clean.startsWith('/comprar')) return '/comprar';
-  if (clean === '/proyectos' || clean.startsWith('/proyectos') || clean.startsWith('/casos')) return '/proyectos';
-  if (clean === '/nosotros' || clean.startsWith('/nosotros') || clean.startsWith('/sobre-nosotros')) return '/nosotros';
-  if (clean === '/contacto' || clean.startsWith('/contacto')) return '/contacto';
+  if (clean === '/valoracion-inmobiliaria' || clean.startsWith('/valoracion')) return '/valoracion-inmobiliaria';
+  if (clean === '/vender-con-reforma') return '/vender-con-reforma';
+  if (clean === '/vender-sin-reforma') return '/vender-sin-reforma';
+  if (clean === '/comprar-para-reformar') return '/comprar-para-reformar';
+  if (clean === '/informe-tecnico-pre-compra' || clean.startsWith('/informe-tecnico')) return '/informe-tecnico-pre-compra';
+  if (clean === '/calculadora-reforma-presto' || clean.startsWith('/calculadora')) return '/calculadora-reforma-presto';
+  if (clean === '/aviso-legal') return '/aviso-legal';
+  if (clean === '/politica-privacidad') return '/politica-privacidad';
+  if (clean === '/politica-cookies') return '/politica-cookies';
+  if (clean === '/vender') return '/vender';
+  if (clean === '/comprar') return '/comprar';
+  if (clean === '/proyectos' || clean.startsWith('/casos')) return '/proyectos';
+  if (clean === '/nosotros' || clean.startsWith('/sobre-nosotros')) return '/nosotros';
+  if (clean === '/contacto') return '/contacto';
   return '/';
 }
 
@@ -111,6 +135,71 @@ const SEO_METADATA: Record<PageRoute, SEOConfig> = {
     title: 'Contacto y Sedes | Agencia Inmobiliaria Inversa',
     description: 'Contacta con nuestro equipo técnico en Barcelona, Madrid o Valencia. Solicita valoración in situ o asesoramiento personalizado sin compromiso.',
     canonicalPath: '/contacto'
+  },
+  '/valoracion-inmobiliaria': {
+    title: 'Valoración Inmobiliaria Técnica In Situ · Precios PRESTO | Inversa',
+    description: 'Auditoría presencial con medición láser, ITE de la finca y cuadro de partidas PRESTO con desglose de 21% IVA. Conoce el potencial real de tu vivienda.',
+    canonicalPath: '/valoracion-inmobiliaria',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      'name': 'Valoración Inmobiliaria Técnica In Situ',
+      'serviceType': 'Tasación Técnica y Estudio de Revalorización',
+      'provider': {
+        '@type': 'RealEstateAgent',
+        'name': 'Agencia Inmobiliaria Inversa'
+      },
+      'areaServed': ['Barcelona', 'Madrid', 'Valencia']
+    }
+  },
+  '/vender-con-reforma': {
+    title: 'Vender con Reforma Estratégica Previa | Máxima Plusvalía | Inversa',
+    description: 'Analizamos tu vivienda, ejecutamos mejoras clave antes de ponerla en el mercado y defendemos su valor frente a ofertas a la baja. Coordinación llave en mano.',
+    canonicalPath: '/vender-con-reforma',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      'name': 'Vender con Reforma Estratégica',
+      'provider': {
+        '@type': 'RealEstateAgent',
+        'name': 'Agencia Inmobiliaria Inversa'
+      }
+    }
+  },
+  '/vender-sin-reforma': {
+    title: 'Vender Vivienda Tal Como Está · Plan Comercial Directo | Inversa',
+    description: 'Vende tu inmueble en su estado actual, con reportaje fotográfico profesional, tasación realista y sin obras previas ni complicaciones.',
+    canonicalPath: '/vender-sin-reforma'
+  },
+  '/comprar-para-reformar': {
+    title: 'Comprar para Reformar · Encuentra, Compra y Transforma | Inversa',
+    description: 'Localización de inmuebles con alto potencial arquitectónico y dirección de obra completa con presupuesto PRESTO cerrado antes de arras.',
+    canonicalPath: '/comprar-para-reformar'
+  },
+  '/informe-tecnico-pre-compra': {
+    title: 'Informe Técnico Pre-Compra de Viviendas con Arquitecto | Inversa',
+    description: 'Acompañamiento pericial de arquitecto colegiado antes de firmar arras. Detección de aluminosis, humedades, bajantes y viabilidad de tabiquería.',
+    canonicalPath: '/informe-tecnico-pre-compra'
+  },
+  '/calculadora-reforma-presto': {
+    title: 'Calculadora de Reforma y Revalorización PRESTO | Inversa',
+    description: 'Calcula el coste orientativo de reformar tu inmueble según cuadros oficiales PRESTO con desglose de 21% IVA legal y estimación de plusvalía.',
+    canonicalPath: '/calculadora-reforma-presto'
+  },
+  '/aviso-legal': {
+    title: 'Aviso Legal y Condiciones de Uso | Agencia Inmobiliaria Inversa',
+    description: 'Información legal, registro mercantil y términos de uso de la plataforma Agencia Inmobiliaria Inversa S.L.',
+    canonicalPath: '/aviso-legal'
+  },
+  '/politica-privacidad': {
+    title: 'Política de Privacidad y RGPD | Agencia Inmobiliaria Inversa',
+    description: 'Protección de datos de carácter personal y ejercicio de derechos ARCO-POL conforme a la normativa europea RGPD.',
+    canonicalPath: '/politica-privacidad'
+  },
+  '/politica-cookies': {
+    title: 'Política de Cookies | Agencia Inmobiliaria Inversa',
+    description: 'Información sobre el uso y configuración de cookies en el sitio web de Agencia Inmobiliaria Inversa.',
+    canonicalPath: '/politica-cookies'
   }
 };
 

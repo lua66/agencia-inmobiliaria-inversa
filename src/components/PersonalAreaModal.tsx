@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, User, ShieldCheck, Wifi, Download, Sparkles, FileText } from 'lucide-react';
+import { X, User, ShieldCheck, Wifi, Download, Sparkles, FileText, FileCheck2 } from 'lucide-react';
 import { mockProjectMilestones, opportunitiesList } from '../data/mockData';
 import { StrategicActionType } from './StrategicCTAButton';
 import { Language } from '../types';
@@ -74,7 +74,7 @@ export const PersonalAreaModal: React.FC<PersonalAreaModalProps> = ({
                 : 'border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
             }`}
           >
-            Mis Proyectos Activos (1)
+            Mis Proyectos Activos (0)
           </button>
           <button
             onClick={() => setActiveTab('saved')}
@@ -84,7 +84,7 @@ export const PersonalAreaModal: React.FC<PersonalAreaModalProps> = ({
                 : 'border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
             }`}
           >
-            Viviendas Guardadas ({opportunitiesList.length})
+            Viviendas Guardadas (0)
           </button>
           <button
             onClick={() => setActiveTab('budgets')}
@@ -94,7 +94,7 @@ export const PersonalAreaModal: React.FC<PersonalAreaModalProps> = ({
                 : 'border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
             }`}
           >
-            Presupuestos & Tasaciones (2)
+            Presupuestos & Tasaciones (0)
           </button>
           <button
             onClick={() => setActiveTab('documents')}
@@ -104,7 +104,7 @@ export const PersonalAreaModal: React.FC<PersonalAreaModalProps> = ({
                 : 'border-transparent text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
             }`}
           >
-            Documentación Técnica
+            Documentación Técnica (0)
           </button>
         </div>
 
@@ -112,122 +112,79 @@ export const PersonalAreaModal: React.FC<PersonalAreaModalProps> = ({
         <div className="p-6 overflow-y-auto flex-1 space-y-6">
           
           {activeTab === 'projects' && (
-            <div className="space-y-4">
-              <div className="p-5 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 transition-colors">
-                <div className="flex flex-col sm:flex-row justify-between sm:items-center gap-2 mb-4">
-                  <div>
-                    <span className="text-[10px] font-bold text-sky-600 dark:text-sky-400 uppercase tracking-wider">
-                      Reforma Integral en Curso
-                    </span>
-                    <h4 className="text-base font-bold text-slate-900 dark:text-white">Ático Pau Claris, Eixample Dret</h4>
-                  </div>
-                  <div className="text-right">
-                    <span className="text-xs text-slate-500 dark:text-slate-400">Progreso global:</span>
-                    <span className="text-sm font-bold text-emerald-600 dark:text-emerald-400 font-mono ml-2">74%</span>
-                  </div>
-                </div>
-
-                <div className="w-full bg-slate-200 dark:bg-slate-900 rounded-full h-2 mb-4 overflow-hidden">
-                  <div className="bg-sky-500 h-2 rounded-full" style={{ width: '74%' }} />
-                </div>
-
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
-                  <div className="p-2.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm dark:shadow-none">
-                    <span className="text-[10px] text-slate-500 block">Fase actual</span>
-                    <span className="font-bold text-slate-800 dark:text-slate-200">Suelos & Acabados</span>
-                  </div>
-                  <div className="p-2.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm dark:shadow-none">
-                    <span className="text-[10px] text-slate-500 block">Presupuesto</span>
-                    <span className="font-bold text-sky-600 dark:text-sky-400 font-mono">65.000 € (Cerrado)</span>
-                  </div>
-                  <div className="p-2.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm dark:shadow-none">
-                    <span className="text-[10px] text-slate-500 block">Entrega prevista</span>
-                    <span className="font-bold text-slate-900 dark:text-white font-mono">18 Oct 2026</span>
-                  </div>
-                  <div className="p-2.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm dark:shadow-none">
-                    <span className="text-[10px] text-slate-500 block">Director de Obra</span>
-                    <span className="font-bold text-slate-800 dark:text-slate-200">Arq. Martín V.</span>
-                  </div>
-                </div>
+            <div className="py-12 text-center space-y-4 max-w-md mx-auto">
+              <div className="w-14 h-14 mx-auto rounded-2xl bg-sky-50 dark:bg-sky-500/10 border border-sky-200 dark:border-sky-800 text-sky-600 dark:text-sky-400 flex items-center justify-center">
+                <Sparkles className="w-7 h-7" />
               </div>
-
-              <div className="p-4 rounded-xl bg-sky-50 dark:bg-sky-950/20 border border-sky-200 dark:border-sky-800/40 flex items-center justify-between transition-colors">
-                <div className="flex items-center gap-3">
-                  <Sparkles className="w-5 h-5 text-sky-600 dark:text-sky-400" />
-                  <div>
-                    <p className="text-xs font-bold text-slate-900 dark:text-white">¿Quieres añadir un nuevo proyecto o vivienda?</p>
-                    <p className="text-[11px] text-slate-600 dark:text-slate-400">Nuestro equipo puede valorar cualquier nuevo inmueble.</p>
-                  </div>
-                </div>
+              <div className="space-y-1.5">
+                <h4 className="text-sm font-bold text-slate-900 dark:text-white">
+                  No tienes proyectos de reforma activos todavía
+                </h4>
+                <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                  Cuando inicies la venta o compra con transformación, podrás seguir aquí en tiempo real las fases de obra, fotos de avance del jefe de obra, certificados y plazos de entrega.
+                </p>
+              </div>
+              <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-2">
                 <button
                   type="button"
                   onClick={() => { onClose(); onOpenActionModal('valuation'); }}
-                  className="px-4 py-2 rounded-lg bg-sky-600 hover:bg-sky-500 text-white text-xs font-semibold"
+                  className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-semibold shadow-md shadow-sky-900/20"
                 >
-                  Nueva Valoración
+                  Solicitar Valoración In Situ
+                </button>
+                <button
+                  type="button"
+                  onClick={() => { onClose(); onOpenActionModal('appointment'); }}
+                  className="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold border border-slate-200 dark:border-slate-700"
+                >
+                  Pide una Cita Técnica
                 </button>
               </div>
             </div>
           )}
 
           {activeTab === 'saved' && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {opportunitiesList.map((opp) => (
-                <div key={opp.id} className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex gap-3 shadow-sm dark:shadow-none">
-                  <img src={opp.image} alt={opp.title} className="w-20 h-20 rounded-lg object-cover" />
-                  <div className="flex-1 min-w-0">
-                    <h5 className="text-xs font-bold text-slate-900 dark:text-white truncate">{opp.title}</h5>
-                    <p className="text-[10px] text-slate-500 dark:text-slate-400">{opp.location}</p>
-                    <p className="text-xs font-bold text-sky-600 dark:text-sky-400 font-mono mt-1">
-                      {opp.currentPrice.toLocaleString('es-ES')} €
-                    </p>
-                    <span className="text-[9px] text-emerald-600 dark:text-emerald-400">Potencial: {opp.potentialScore}/10</span>
-                  </div>
-                </div>
-              ))}
+            <div className="py-12 text-center space-y-3 max-w-md mx-auto">
+              <div className="w-12 h-12 mx-auto rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400">
+                <FileText className="w-6 h-6" />
+              </div>
+              <h5 className="text-sm font-bold text-slate-900 dark:text-white">No tienes viviendas guardadas en seguimiento</h5>
+              <p className="text-xs text-slate-500 dark:text-slate-400">
+                Explora nuestras oportunidades inmobiliarias para transformarlas a tu gusto y guárdalas para compararlas.
+              </p>
             </div>
           )}
 
           {activeTab === 'budgets' && (
-            <div className="space-y-3 text-xs">
-              <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
-                <div>
-                  <h5 className="font-bold text-slate-900 dark:text-white">Presupuesto Ejecutivo Obra Pau Claris</h5>
-                  <p className="text-slate-500 dark:text-slate-400 text-[11px]">Validado y visado por colegio de arquitectos</p>
-                </div>
-                <span className="font-mono font-bold text-emerald-600 dark:text-emerald-400">65.000 € (Aprobado)</span>
+            <div className="py-12 text-center space-y-4 max-w-md mx-auto">
+              <div className="w-12 h-12 mx-auto rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400">
+                <FileCheck2 className="w-6 h-6" />
               </div>
-              <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center justify-between">
-                <div>
-                  <h5 className="font-bold text-slate-900 dark:text-white">Estudio de Revalorización Vivienda Provença</h5>
-                  <p className="text-slate-500 dark:text-slate-400 text-[11px]">Tasación comparativa previa a reforma</p>
-                </div>
-                <span className="font-mono font-bold text-sky-600 dark:text-sky-400">+97.000 € plusvalía</span>
+              <div className="space-y-1">
+                <h5 className="text-sm font-bold text-slate-900 dark:text-white">Sin presupuestos PRESTO ni tasaciones previas</h5>
+                <p className="text-xs text-slate-500 dark:text-slate-400">
+                  Tras la visita técnica de nuestro arquitecto in situ, recibirás aquí el cuadro de precios oficial desglosado con 21% de IVA legal.
+                </p>
               </div>
+              <button
+                type="button"
+                onClick={() => { onClose(); onOpenActionModal('valuation'); }}
+                className="px-4 py-2 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-semibold"
+              >
+                Solicitar Medición Técnica
+              </button>
             </div>
           )}
 
           {activeTab === 'documents' && (
-            <div className="space-y-2 text-xs">
-              {[
-                { name: 'Licencia_Obras_Mayores_Ajuntament.pdf', size: '2.4 MB', date: '12 Sep 2026' },
-                { name: 'Plano_Ejecutivo_Redistribucion_3D.dwg', size: '18.1 MB', date: '15 Sep 2026' },
-                { name: 'Certificado_Eficiencia_Energetica_A.pdf', size: '1.1 MB', date: '28 Sep 2026' },
-                { name: 'Poliza_Seguro_Responsabilidad_Civil.pdf', size: '840 KB', date: '01 Sep 2026' }
-              ].map((doc, i) => (
-                <div key={i} className="p-3 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center justify-between shadow-sm dark:shadow-none">
-                  <div className="flex items-center gap-2.5">
-                    <FileText className="w-4 h-4 text-sky-600 dark:text-sky-400" />
-                    <div>
-                      <span className="text-slate-800 dark:text-slate-200 font-medium">{doc.name}</span>
-                      <span className="text-[10px] text-slate-500 block font-mono">{doc.size} · {doc.date}</span>
-                    </div>
-                  </div>
-                  <button className="p-2 rounded bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-800 text-sky-600 dark:text-sky-400 border border-slate-200 dark:border-slate-700">
-                    <Download className="w-3.5 h-3.5" />
-                  </button>
-                </div>
-              ))}
+            <div className="py-12 text-center space-y-3 max-w-md mx-auto">
+              <div className="w-12 h-12 mx-auto rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400">
+                <Download className="w-6 h-6" />
+              </div>
+              <h5 className="text-sm font-bold text-slate-900 dark:text-white">Carpeta Documental Vacía</h5>
+              <p className="text-xs text-slate-500 dark:text-slate-400">
+                Aquí podrás descargar tus planos ejecutivos 3D, licencias municipales concedidas, certificados energéticos A y contratos visados.
+              </p>
             </div>
           )}
 

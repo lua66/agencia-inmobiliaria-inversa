@@ -3,15 +3,102 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Agencia Inmobiliaria Inversa | No solo vendemos viviendas. Transformamos su valor.</title>
-    <meta name="description" content="Ecosistema inmobiliario integral: Inmobiliaria, Reforma, Rehabilitación, Diseño, Valoración y Acompañamiento en cada etapa." />
-    <meta property="og:title" content="Agencia Inmobiliaria Inversa" />
-    <meta property="og:description" content="No solo vendemos viviendas. Ayudamos a conseguir la mejor versión de tu inmueble." />
+    
+    <!-- Primary Page Title & Meta Description -->
+    <title>Agencia Inmobiliaria Inversa | Inmobiliaria + Transformación de Viviendas</title>
+    <meta name="title" content="Agencia Inmobiliaria Inversa | Inmobiliaria + Transformación de Viviendas" />
+    <meta name="description" content="No solo vendemos viviendas. Transformamos su valor. Acompañamiento integral antes, durante y después en venta, compra y reforma con red de profesionales." />
+    <meta name="keywords" content="inmobiliaria, transformacion de viviendas, reformas integrales, venta de viviendas, compra de inmuebles, arquitectura, interiorismo, valoracion inmobiliaria, rehabilitacion, normativa presto" />
+    <meta name="author" content="Agencia Inmobiliaria Inversa" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Favicon & App Icons (using the exact website logo skyline) -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="alternate icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#030712" />
+    <meta name="msapplication-TileColor" content="#030712" />
+
+    <!-- Open Graph / Facebook / WhatsApp / LinkedIn -->
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Agencia Inmobiliaria Inversa" />
+    <meta property="og:title" content="Agencia Inmobiliaria Inversa | Inmobiliaria + Transformación de Viviendas" />
+    <meta property="og:description" content="No solo vendemos viviendas. Transformamos su valor. Acompañamiento antes, durante y después para vendedores y compradores." />
+    <meta property="og:image" content="/og-image.png" />
+    <meta property="og:image:secure_url" content="/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Agencia Inmobiliaria Inversa - Vende mejor, compra con visión, transforma tu vivienda" />
+    <meta property="og:locale" content="es_ES" />
+
+    <!-- Twitter / X Cards -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Agencia Inmobiliaria Inversa | Inmobiliaria + Transformación de Viviendas" />
+    <meta name="twitter:description" content="No solo vendemos viviendas. Transformamos su valor. Vende mejor · Compra con visión · Transforma tu vivienda." />
+    <meta name="twitter:image" content="/og-image.png" />
+    <meta name="twitter:image:alt" content="Agencia Inmobiliaria Inversa - Logotipo y concepto de transformación" />
+
+    <!-- Google Fonts Preload -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Structured Data (JSON-LD) for Schema.org RealEstateAgent & GeneralContractor -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": ["RealEstateAgent", "GeneralContractor"],
+      "name": "Agencia Inmobiliaria Inversa",
+      "alternateName": "Inmobiliaria Inversa",
+      "description": "Ecosistema inmobiliario integral que combina intermediación de compraventa con proyectos de transformación, reforma y rehabilitación de viviendas.",
+      "url": "/",
+      "logo": "/logo.svg",
+      "image": "/og-image.png",
+      "priceRange": "€€ - €€€",
+      "knowsAbout": [
+        "Intermediación inmobiliaria para venta y compra",
+        "Reformas integrales y parciales de viviendas",
+        "Rehabilitación y revalorización patrimonial",
+        "Presupuestos de obra orientativos bajo base de costes de construcción",
+        "Coordinación de ecosistema de profesionales (arquitectos, instaladores, interioristas)"
+      ],
+      "slogan": "No solo vendemos viviendas. Transformamos su valor.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Servicios Inmobiliarios y de Transformación",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Venta de Vivienda (Tal como está o con Mejora Previa)",
+              "description": "Estudio del potencial del inmueble antes de comercializar para maximizar su valor de salida."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Compra y Transformación de Vivienda",
+              "description": "Búsqueda con visión arquitectónica: Encuentra, Compra y Transforma."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Ecosistema de Profesionales y Coordinación de Obras",
+              "description": "Red homologada de arquitectos, albañiles, instaladores y técnicos con presupuestos transparentes."
+            }
+          }
+        ]
+      }
+    }
+    </script>
   </head>
   <body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased selection:bg-sky-500/20 selection:text-sky-300">
     <div id="root"></div>

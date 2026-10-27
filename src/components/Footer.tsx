@@ -3,17 +3,19 @@ import { Logo } from './Logo';
 import { translations } from '../locales/translations';
 import { Language } from '../types';
 import { useRouter, PageRoute } from '../router/RouterContext';
-import { Wifi, MapPin, Phone, Mail, ArrowRight } from 'lucide-react';
+import { Wifi, MapPin, Phone, Mail, ArrowRight, Lock } from 'lucide-react';
 import { StrategicCTAButton, StrategicActionType } from './StrategicCTAButton';
 
 interface FooterProps {
   lang: Language;
   onOpenActionModal: (type: StrategicActionType) => void;
+  onOpenAgentCrm?: () => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({
   lang,
-  onOpenActionModal
+  onOpenActionModal,
+  onOpenAgentCrm
 }) => {
   const t = translations[lang].footer;
   const navT = translations[lang].nav;
@@ -46,36 +48,72 @@ export const Footer: React.FC<FooterProps> = ({
           {/* Páginas Principales (Internal Linking for SEO & Google Indexing) */}
           <div>
             <h4 className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider mb-3">
-              Páginas de la Web
+              Servicios Inmobiliarios
             </h4>
             <ul className="space-y-2 text-xs">
               <li>
                 <button
                   type="button"
-                  onClick={() => navigate('/')}
-                  className="hover:text-sky-600 dark:hover:text-sky-400 transition-colors"
+                  onClick={() => navigate('/valoracion-inmobiliaria')}
+                  className="hover:text-sky-600 dark:hover:text-sky-400 transition-colors text-left"
                 >
-                  Portada e Inicio
+                  Valoración Técnica In Situ (PRESTO)
                 </button>
               </li>
               <li>
                 <button
                   type="button"
-                  onClick={() => navigate('/vender')}
-                  className="hover:text-sky-600 dark:hover:text-sky-400 transition-colors"
+                  onClick={() => navigate('/vender-con-reforma')}
+                  className="hover:text-sky-600 dark:hover:text-sky-400 transition-colors text-left"
                 >
-                  Quiero Vender (Propietarios)
+                  Vender con Reforma Estratégica
                 </button>
               </li>
               <li>
                 <button
                   type="button"
-                  onClick={() => navigate('/comprar')}
-                  className="hover:text-sky-600 dark:hover:text-sky-400 transition-colors"
+                  onClick={() => navigate('/vender-sin-reforma')}
+                  className="hover:text-sky-600 dark:hover:text-sky-400 transition-colors text-left"
                 >
-                  Quiero Comprar (Compradores)
+                  Vender Tal Como Está (Directo)
                 </button>
               </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => navigate('/comprar-para-reformar')}
+                  className="hover:text-sky-600 dark:hover:text-sky-400 transition-colors text-left"
+                >
+                  Comprar para Reformar
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => navigate('/informe-tecnico-pre-compra')}
+                  className="hover:text-sky-600 dark:hover:text-sky-400 transition-colors text-left"
+                >
+                  Informe Pre-Compra de Arquitecto
+                </button>
+              </li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => navigate('/calculadora-reforma-presto')}
+                  className="hover:text-sky-600 dark:hover:text-sky-400 transition-colors text-left font-semibold text-sky-600 dark:text-sky-400"
+                >
+                  Calculadora Oficial PRESTO
+                </button>
+              </li>
+            </ul>
+          </div>
+
+          {/* Secciones y Navegación */}
+          <div>
+            <h4 className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider mb-3">
+              Plataforma & Delegaciones
+            </h4>
+            <ul className="space-y-2 text-xs">
               <li>
                 <button
                   type="button"
@@ -91,7 +129,7 @@ export const Footer: React.FC<FooterProps> = ({
                   onClick={() => navigate('/nosotros')}
                   className="hover:text-sky-600 dark:hover:text-sky-400 transition-colors"
                 >
-                  Sobre Nosotros y Equipo
+                  Sobre Nosotros y Trayectoria
                 </button>
               </li>
               <li>
@@ -100,39 +138,11 @@ export const Footer: React.FC<FooterProps> = ({
                   onClick={() => navigate('/contacto')}
                   className="hover:text-sky-600 dark:hover:text-sky-400 transition-colors"
                 >
-                  Sedes y Contacto
+                  Sedes (Barcelona, Madrid, Valencia)
                 </button>
               </li>
-            </ul>
-          </div>
-
-          {/* Sedes Físicas */}
-          <div>
-            <h4 className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider mb-3">
-              Sedes Centrales
-            </h4>
-            <ul className="space-y-2 text-xs">
-              <li className="flex items-start gap-2 text-slate-700 dark:text-slate-300">
-                <MapPin className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400 shrink-0 mt-0.5" />
-                <span>Barcelona: Passeig de Gràcia 48</span>
-              </li>
-              <li className="flex items-start gap-2 text-slate-700 dark:text-slate-300">
-                <MapPin className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400 shrink-0 mt-0.5" />
-                <span>Madrid: Calle Velázquez 32</span>
-              </li>
-              <li className="flex items-start gap-2 text-slate-700 dark:text-slate-300">
-                <MapPin className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400 shrink-0 mt-0.5" />
-                <span>Valencia: Calle Colón 18</span>
-              </li>
-              <li className="pt-2">
-                <button
-                  type="button"
-                  onClick={() => navigate('/contacto')}
-                  className="text-sky-600 dark:text-sky-400 text-xs font-semibold hover:underline inline-flex items-center gap-1"
-                >
-                  <span>Ver todas las delegaciones</span>
-                  <ArrowRight className="w-3 h-3" />
-                </button>
+              <li className="pt-2 text-slate-500 text-[11px]">
+                Sede Central: Passeig de Gràcia 48, Barcelona
               </li>
             </ul>
           </div>
@@ -179,16 +189,48 @@ export const Footer: React.FC<FooterProps> = ({
       {/* Bottom Sub-bar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
         <div className="flex items-center gap-2">
-          <span>© 2026 Agencia Inmobiliaria Inversa. Todos los derechos reservados.</span>
+          <span>© 2026 Agencia Inmobiliaria Inversa S.L. Todos los derechos reservados.</span>
         </div>
 
         <div className="flex flex-wrap items-center gap-4 text-[11px]">
-          <span className="hover:text-slate-700 dark:hover:text-slate-400 cursor-pointer">Aviso Legal y Transparencia</span>
+          <button
+            type="button"
+            onClick={() => navigate('/aviso-legal')}
+            className="hover:text-slate-700 dark:hover:text-slate-300 transition-colors"
+          >
+            Aviso Legal
+          </button>
           <span>·</span>
-          <span className="hover:text-slate-700 dark:hover:text-slate-400 cursor-pointer">Política de Privacidad (RGPD)</span>
+          <button
+            type="button"
+            onClick={() => navigate('/politica-privacidad')}
+            className="hover:text-slate-700 dark:hover:text-slate-300 transition-colors"
+          >
+            Política de Privacidad (RGPD)
+          </button>
           <span>·</span>
-          <span className="hover:text-slate-700 dark:hover:text-slate-400 cursor-pointer">Política de Cookies</span>
+          <button
+            type="button"
+            onClick={() => navigate('/politica-cookies')}
+            className="hover:text-slate-700 dark:hover:text-slate-300 transition-colors"
+          >
+            Política de Cookies
+          </button>
           <span>·</span>
+          {onOpenAgentCrm && (
+            <>
+              <button
+                type="button"
+                onClick={onOpenAgentCrm}
+                className="inline-flex items-center gap-1 font-semibold text-amber-700 dark:text-amber-400 hover:text-amber-800 dark:hover:text-amber-300 transition-colors"
+                title="Acceso restringido para agentes inmobiliarios"
+              >
+                <Lock className="w-3 h-3 text-amber-600 dark:text-amber-400" />
+                <span>Acceso Agente (CRM)</span>
+              </button>
+              <span>·</span>
+            </>
+          )}
           <div className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400/80">
             <Wifi className="w-3 h-3" />
             <span>Sincronización PWA Activa</span>

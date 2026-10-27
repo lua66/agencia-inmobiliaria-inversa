@@ -3,7 +3,7 @@ import { Logo } from './Logo';
 import { translations } from '../locales/translations';
 import { Language, Theme } from '../types';
 import { useRouter, PageRoute } from '../router/RouterContext';
-import { Sun, Moon, Globe, User, Menu, X, Bell } from 'lucide-react';
+import { Sun, Moon, Globe, User, Menu, X, Bell, Lock } from 'lucide-react';
 
 interface NavbarProps {
   lang: Language;
@@ -12,6 +12,7 @@ interface NavbarProps {
   onToggleTheme: () => void;
   onOpenPersonalArea: () => void;
   onOpenNotifications: () => void;
+  onOpenAgentCrm: () => void;
   unreadNotificationsCount?: number;
 }
 
@@ -22,6 +23,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   onToggleTheme,
   onOpenPersonalArea,
   onOpenNotifications,
+  onOpenAgentCrm,
   unreadNotificationsCount = 2,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -162,6 +164,18 @@ export const Navbar: React.FC<NavbarProps> = ({
             <span className="hidden xl:inline">{t.personalArea}</span>
           </button>
 
+          {/* Exclusive Agent CRM Access Button (with password protection) */}
+          <button
+            type="button"
+            onClick={onOpenAgentCrm}
+            className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-1.5 sm:py-2 rounded-lg text-xs font-semibold text-amber-800 dark:text-amber-300 hover:text-amber-900 dark:hover:text-amber-200 bg-amber-100/80 dark:bg-amber-950/40 hover:bg-amber-200/80 dark:hover:bg-amber-900/60 border border-amber-300 dark:border-amber-700/60 transition-colors shrink-0 shadow-sm"
+            title="Acceso Exclusivo Agente Inmobiliario (CRM)"
+            aria-label="Acceso CRM Agente"
+          >
+            <Lock className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400 shrink-0" />
+            <span className="hidden lg:inline font-bold">CRM Agente</span>
+          </button>
+
           {/* Mobile/Tablet Menu Hamburger Button */}
           <button
             type="button"
@@ -204,6 +218,15 @@ export const Navbar: React.FC<NavbarProps> = ({
             >
               <User className="w-4 h-4 text-white" />
               <span>{t.personalArea} (Panel de Cliente)</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => { onOpenAgentCrm(); setMobileMenuOpen(false); }}
+              className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-bold bg-amber-100 dark:bg-amber-950/60 border border-amber-300 dark:border-amber-700/60 text-amber-800 dark:text-amber-300 hover:bg-amber-200 dark:hover:bg-amber-900/60 transition-colors"
+            >
+              <Lock className="w-4 h-4 text-amber-600 dark:text-amber-400" />
+              <span>Acceso Exclusivo Agente (CRM Clientes)</span>
             </button>
           </div>
         </div>
