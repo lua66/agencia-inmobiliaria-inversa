@@ -1,0 +1,6 @@
+{
+  "name": "Agencia Inmobiliaria Inversa",
+  "description": "Plataforma inmobiliaria que combina compraventa, reforma, rehabilitación, valoración y diseño para transformar el valor de cada vivienda.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
