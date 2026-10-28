@@ -38,7 +38,6 @@ export default defineConfig(() => {
 
             // Determine origin dynamically to match the exact property domain requested by Googlebot
             const hostHeader = (req.headers['x-forwarded-host'] as string) || (req.headers['host'] as string) || 'ais-pre-jrxje44vozm2mzkpvzzmeh-14911313193.europe-west3.run.app';
-            // Clean host of port if behind standard reverse proxy
             const cleanHost = hostHeader.split(',')[0].trim();
             const protoHeader = (req.headers['x-forwarded-proto'] as string) || 'https';
             const origin = `${protoHeader}://${cleanHost}`;
@@ -74,6 +73,66 @@ Sitemap: ${origin}/sitemap.xml
 `;
               res.setHeader('Content-Type', 'text/plain; charset=utf-8');
               res.end(robots);
+              return;
+            }
+
+            // 4. Betipo API Reverse Proxy (solves Betipo's 500 origin restriction on custom/preview domains)
+            if (url.startsWith('/api/betipo')) {
+              const targetPath = url.replace('/api/betipo', '');
+              const targetUrl = `https://api.betipo.es${targetPath}`;
+
+              if (req.method === 'OPTIONS') {
+                res.setHeader('Access-Control-Allow-Origin', '*');
+                res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+                res.setHeader('Access-Control-Allow-Headers', '*');
+                res.statusCode = 204;
+                res.end();
+                return;
+              }
+
+              const chunks: Buffer[] = [];
+              req.on('data', (chunk: Buffer) => chunks.push(chunk));
+              req.on('end', async () => {
+                try {
+                  const body = chunks.length > 0 ? Buffer.concat(chunks) : undefined;
+                  const fetchHeaders: Record<string, string> = {
+                    'Origin': 'https://betipo.es',
+                    'Referer': 'https://betipo.es/',
+                    'User-Agent': (req.headers['user-agent'] as string) || 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+                  };
+                  if (req.headers['content-type']) {
+                    fetchHeaders['Content-Type'] = req.headers['content-type'] as string;
+                  }
+                  if (req.headers['accept']) {
+                    fetchHeaders['Accept'] = req.headers['accept'] as string;
+                  }
+
+                  const upstreamRes = await fetch(targetUrl, {
+                    method: req.method,
+                    headers: fetchHeaders,
+                    body: req.method !== 'GET' && req.method !== 'HEAD' ? body : undefined,
+                  });
+
+                  res.statusCode = upstreamRes.status;
+                  res.setHeader('Access-Control-Allow-Origin', '*');
+                  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+                  res.setHeader('Access-Control-Allow-Headers', '*');
+
+                  const contentType = upstreamRes.headers.get('content-type');
+                  if (contentType) {
+                    res.setHeader('Content-Type', contentType);
+                  }
+
+                  const arrayBuffer = await upstreamRes.arrayBuffer();
+                  res.end(Buffer.from(arrayBuffer));
+                } catch (err: unknown) {
+                  const errMsg = err instanceof Error ? err.message : String(err);
+                  console.error('Betipo proxy error:', errMsg);
+                  res.statusCode = 502;
+                  res.setHeader('Content-Type', 'application/json');
+                  res.end(JSON.stringify({ error: 'Proxy error', details: errMsg }));
+                }
+              });
               return;
             }
 

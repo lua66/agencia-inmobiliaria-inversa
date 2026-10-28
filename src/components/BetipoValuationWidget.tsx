@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Loader2, AlertCircle } from 'lucide-react';
+import { Loader2, AlertCircle, RefreshCw } from 'lucide-react';
 
 interface BetipoValuationWidgetProps {
   onSuccess?: () => void;
@@ -8,6 +8,7 @@ interface BetipoValuationWidgetProps {
 export const BetipoValuationWidget: React.FC<BetipoValuationWidgetProps> = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [retryKey, setRetryKey] = useState(0);
 
   useEffect(() => {
     let isMounted = true;
@@ -20,16 +21,25 @@ export const BetipoValuationWidget: React.FC<BetipoValuationWidgetProps> = () =>
         const target = document.getElementById('btp-valuation-widget');
         if (!target) return;
 
-        // Fetch the official widget configuration from Betipo API
-        const response = await fetch('https://api.betipo.es/api/widget-by-inmobiliaria/3584440f-e21b-46cb-adc9-ec3c980c3c6b');
-        if (!response.ok) {
-          throw new Error(`Error en servidor Betipo (${response.status})`);
-        }
+        // Fetch widget via local proxy route to bypass Betipo's 500 origin restriction
+        const proxyUrl = '/api/betipo/api/widget-by-inmobiliaria/3584440f-e21b-46cb-adc9-ec3c980c3c6b';
+        let response = await fetch(proxyUrl);
         
-        const { html, css, jscript } = await response.json();
+        // If proxy not reachable, try direct fallback
+        if (!response.ok) {
+          response = await fetch('https://api.betipo.es/api/widget-by-inmobiliaria/3584440f-e21b-46cb-adc9-ec3c980c3c6b');
+        }
+
+        if (!response.ok) {
+          throw new Error(`El servicio de valoración no está disponible temporalmente (${response.status})`);
+        }
+
+        const data = await response.json();
         if (!isMounted) return;
 
-        // 1. Inject or update CSS stylesheet
+        const { html, css, jscript } = data;
+
+        // 1. Inject or update Betipo CSS stylesheet
         let styleEl = document.getElementById('btp-widget-css') as HTMLStyleElement | null;
         if (!styleEl) {
           styleEl = document.createElement('style');
@@ -42,29 +52,26 @@ export const BetipoValuationWidget: React.FC<BetipoValuationWidgetProps> = () =>
         target.innerHTML = html;
         setLoading(false);
 
-        // 3. Inject & execute Betipo JS (re-created on mount to rebind events)
+        // 3. Patch JS so internal API calls (catastro, leads, etc.) are routed through the proxy
+        const patchedJs = (jscript || '').replaceAll('https://api.betipo.es', '/api/betipo');
+
+        // Remove any previous instance of the script
         const oldScript = document.getElementById('btp-widget-js');
         if (oldScript) {
           oldScript.remove();
         }
 
+        // Execute patched Betipo script
         const scriptEl = document.createElement('script');
         scriptEl.id = 'btp-widget-js';
-        scriptEl.textContent = jscript;
+        scriptEl.textContent = patchedJs;
         document.body.appendChild(scriptEl);
 
-      } catch (err) {
+      } catch (err: unknown) {
+        const errMsg = err instanceof Error ? err.message : 'Error al conectar con el servidor de valoración';
         console.error('Error cargando el widget de valoración Betipo:', err);
         if (isMounted) {
-          // Fallback: standard cdn script tag
-          const existingCdn = document.getElementById('btp-cdn-script');
-          if (!existingCdn) {
-            const script = document.createElement('script');
-            script.id = 'btp-cdn-script';
-            script.src = 'https://cdn.betipo.es/widget.js';
-            script.async = true;
-            document.body.appendChild(script);
-          }
+          setError(errMsg);
           setLoading(false);
         }
       }
@@ -75,7 +82,7 @@ export const BetipoValuationWidget: React.FC<BetipoValuationWidgetProps> = () =>
     return () => {
       isMounted = false;
     };
-  }, []);
+  }, [retryKey]);
 
   return (
     <div className="w-full flex flex-col items-center justify-center">
@@ -93,9 +100,20 @@ export const BetipoValuationWidget: React.FC<BetipoValuationWidgetProps> = () =>
         )}
 
         {error && (
-          <div className="p-4 rounded-xl bg-amber-50 dark:bg-amber-950/30 border border-amber-300 dark:border-amber-600 text-amber-800 dark:text-amber-200 text-xs flex items-center gap-2">
-            <AlertCircle className="w-4 h-4 shrink-0 text-amber-600" />
-            <span>{error}</span>
+          <div className="p-6 rounded-2xl bg-amber-50 dark:bg-amber-950/30 border border-amber-300 dark:border-amber-600 text-amber-800 dark:text-amber-200 text-xs flex flex-col items-center gap-3 text-center">
+            <AlertCircle className="w-6 h-6 text-amber-600 dark:text-amber-400" />
+            <div>
+              <p className="font-semibold text-sm">No se pudo cargar la herramienta de valoración</p>
+              <p className="text-[11px] text-slate-600 dark:text-slate-400 mt-1">{error}</p>
+            </div>
+            <button
+              type="button"
+              onClick={() => setRetryKey(k => k + 1)}
+              className="mt-2 inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-sky-600 text-white font-medium hover:bg-sky-500 transition-colors shadow-sm"
+            >
+              <RefreshCw className="w-3.5 h-3.5" />
+              <span>Reintentar</span>
+            </button>
           </div>
         )}
       </div>
