@@ -13,8 +13,7 @@ import {
   FileSpreadsheet
 } from 'lucide-react';
 import { StrategicCTAButton, StrategicActionType } from '../components/StrategicCTAButton';
-import { ValueCalculator } from '../components/ValueCalculator';
-import { PropertyValuationCalculator } from '../components/PropertyValuationCalculator';
+import { BetipoValuationWidget } from '../components/BetipoValuationWidget';
 import { useRouter } from '../router/RouterContext';
 
 interface ValoracionPageProps {
@@ -76,18 +75,18 @@ export const ValoracionPage: React.FC<ValoracionPageProps> = ({ onOpenActionModa
         </p>
       </section>
 
-      {/* Interactive Spanish Property Valuation Calculator */}
-      <section className="space-y-6">
+      {/* Official Betipo Online Valuation Tool */}
+      <section className="space-y-4">
         <div className="max-w-2xl">
           <h2 className="text-xl sm:text-2xl font-bold font-serif text-slate-900 dark:text-white">
-            Calculadora de Valoración de Vivienda en Toda España
+            Valora tu Inmueble Online Gratis
           </h2>
-          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
-            Selecciona tu provincia, tipología, estado de la vivienda y superficie para obtener el valor estimado de mercado y el potencial con transformación.
+          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+            Introduce la dirección y características de tu vivienda para obtener una estimación de mercado al instante.
           </p>
         </div>
-        <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl">
-          <PropertyValuationCalculator lang="es" />
+        <div className="p-4 sm:p-6 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xl overflow-hidden">
+          <BetipoValuationWidget />
         </div>
       </section>
 

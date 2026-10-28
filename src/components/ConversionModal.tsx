@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { X, CheckCircle2, Clock, Sparkles, Building2, Calendar, AlertTriangle, Home, Calculator } from 'lucide-react';
+import { X, CheckCircle2, Clock, Building2, Calendar, AlertTriangle, Home } from 'lucide-react';
 import { StrategicActionType } from './StrategicCTAButton';
 import { translations } from '../locales/translations';
 import { Language } from '../types';
 import { ClientType } from '../types/crm';
 import { crmService } from '../data/crmService';
-import { PropertyValuationCalculator } from './PropertyValuationCalculator';
+import { BetipoValuationWidget } from './BetipoValuationWidget';
 
 interface ConversionModalProps {
   isOpen: boolean;
@@ -21,18 +21,22 @@ export const ConversionModal: React.FC<ConversionModalProps> = ({
   lang
 }) => {
   const [submitted, setSubmitted] = useState(false);
-  const [clientType, setClientType] = useState<ClientType>(actionType === 'valuation' ? 'vendedor' : 'comprador');
+  const [clientType, setClientType] = useState<ClientType>('comprador');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
     address: '',
-    inquiryType: actionType === 'valuation' ? 'Valoración y Visita Técnica In Situ' : 'Cita Asesoría Inmobiliaria y Reforma',
+    inquiryType: 'Cita Asesoría Inmobiliaria y Reforma',
     message: ''
   });
 
   useEffect(() => {
-    setClientType(actionType === 'valuation' ? 'vendedor' : 'comprador');
+    if (actionType === 'valuation') {
+      setClientType('vendedor');
+    } else {
+      setClientType('comprador');
+    }
   }, [actionType]);
 
   const t = translations[lang].modal;
@@ -43,18 +47,22 @@ export const ConversionModal: React.FC<ConversionModalProps> = ({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Persist lead directly into CRM
+    // Persist lead directly into CRM with segmentation
     crmService.saveLead({
       clientType,
       name: formData.name,
       phone: formData.phone,
       email: formData.email,
       address: formData.address,
-      city: formData.address.includes('Madrid') ? 'Madrid' : formData.address.includes('Valencia') ? 'Valencia' : 'Barcelona',
-      serviceInterest: isValuation 
-        ? 'Valoración y Visita Técnica In Situ (PRESTO)' 
-        : (clientType === 'vendedor' ? 'Asesoría Venta & Reforma Previa' : 'Asesoría Compra & Transformación'),
-      source: isValuation ? 'Modal Valoración Técnica In Situ' : 'Modal Cita Asesoría Inmobiliaria Inversa',
+      city: formData.address.toLowerCase().includes('madrid') 
+        ? 'Madrid' 
+        : formData.address.toLowerCase().includes('valencia') 
+        ? 'Valencia' 
+        : formData.address.toLowerCase().includes('barcelona') 
+        ? 'Barcelona' 
+        : 'España',
+      serviceInterest: clientType === 'vendedor' ? 'Asesoría Venta & Reforma Previa' : 'Asesoría Compra & Transformación',
+      source: 'Modal Cita Asesoría Inmobiliaria',
       message: formData.message,
       prestoAcknowledged: true,
       initialNote: `Solicitud web de ${clientType === 'vendedor' ? 'PROPIETARIO / VENDEDOR' : 'COMPRADOR / INVERSOR'}. Dirección: ${formData.address}`
@@ -65,6 +73,14 @@ export const ConversionModal: React.FC<ConversionModalProps> = ({
 
   const handleReset = () => {
     setSubmitted(false);
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      address: '',
+      inquiryType: 'Cita Asesoría Inmobiliaria y Reforma',
+      message: ''
+    });
     onClose();
   };
 
@@ -76,26 +92,22 @@ export const ConversionModal: React.FC<ConversionModalProps> = ({
         onClick={onClose}
       />
 
-      {/* Modal Card Container - Spacious max-w-4xl for Valuation Calculator, max-w-xl for Appointment */}
-      <div className={`relative w-full ${isValuation ? 'max-w-4xl' : 'max-w-xl'} bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 rounded-2xl sm:rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden z-10 my-6 transition-all duration-200`}>
+      {/* Modal Card Container */}
+      <div className={`relative w-full ${isValuation ? 'max-w-2xl' : 'max-w-xl'} bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100 rounded-2xl sm:rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden z-10 my-6 transition-all duration-200`}>
         
         {/* Header Ribbon */}
-        <div className={`p-4 sm:p-6 border-b border-slate-200 dark:border-slate-800 ${isValuation ? 'bg-gradient-to-r from-sky-50 to-white dark:from-sky-950/60 dark:to-slate-900' : 'bg-gradient-to-r from-slate-50 to-white dark:from-slate-900 dark:to-slate-800'}`}>
+        <div className={`p-4 sm:p-6 border-b border-slate-200 dark:border-slate-800 ${isValuation ? 'bg-gradient-to-r from-sky-50 to-white dark:from-sky-950/50 dark:to-slate-900' : 'bg-gradient-to-r from-slate-50 to-white dark:from-slate-900 dark:to-slate-800'}`}>
           <div className="flex items-start justify-between gap-3">
             <div className="flex items-center gap-3">
-              <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 ${isValuation ? 'bg-sky-600 text-white shadow-md shadow-sky-600/30' : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-sky-400 border border-slate-300 dark:border-slate-700'}`}>
-                {isValuation ? <Calculator className="w-5 h-5" /> : <Calendar className="w-5 h-5" />}
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 bg-sky-50 dark:bg-sky-500/10 text-sky-600 dark:text-sky-400 border border-sky-200 dark:border-sky-500/20">
+                {isValuation ? <Home className="w-5 h-5" /> : <Calendar className="w-5 h-5" />}
               </div>
               <div>
                 <h3 className="text-lg sm:text-xl font-bold font-serif text-slate-900 dark:text-white tracking-tight transition-colors">
-                  {isValuation 
-                    ? 'Calculadora de Valoración de Vivienda en Toda España' 
-                    : t.appointmentTitle}
+                  {isValuation ? 'Valora tu Vivienda Gratis' : t.appointmentTitle}
                 </h3>
                 <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 transition-colors">
-                  {isValuation 
-                    ? 'Estima el valor actual según provincia y zona, y calcula el potencial de plusvalía con Inversa.' 
-                    : t.appointmentSubtitle}
+                  {isValuation ? 'Herramienta oficial de tasación inmobiliaria' : t.appointmentSubtitle}
                 </p>
               </div>
             </div>
@@ -113,14 +125,12 @@ export const ConversionModal: React.FC<ConversionModalProps> = ({
         {/* Content Body */}
         <div className="p-4 sm:p-6 max-h-[82vh] overflow-y-auto">
           {isValuation ? (
-            /* NUEVA CALCULADORA DE VALORACIÓN EN TODA ESPAÑA + BOTÓN DE FORMULARIO DEBAJO */
-            <PropertyValuationCalculator
-              lang={lang}
-              onSuccessClose={handleReset}
-              onCancel={onClose}
-            />
+            /* WIDGET OFICIAL BETIPO DE VALORACIÓN */
+            <div className="w-full">
+              <BetipoValuationWidget />
+            </div>
           ) : (
-            /* FORMULARIO DIRECTO PARA "PIDE UNA CITA" */
+            /* FORMULARIO PARA CITA TÉCNICA */
             submitted ? (
               <div className="py-8 text-center space-y-4">
                 <div className="w-14 h-14 mx-auto rounded-full bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-300 dark:border-emerald-500/30 text-emerald-600 dark:text-emerald-400 flex items-center justify-center">
@@ -146,9 +156,9 @@ export const ConversionModal: React.FC<ConversionModalProps> = ({
               <form onSubmit={handleSubmit} className="space-y-4">
                 
                 {/* Technical disclaimer notice */}
-                <div className="p-3 rounded-xl bg-amber-50 dark:bg-amber-950/20 border border-amber-300 dark:border-amber-500/30 text-[11px] text-amber-900 dark:text-amber-200 space-y-1 transition-colors">
-                  <div className="flex items-center gap-1.5 font-bold text-amber-800 dark:text-amber-300">
-                    <AlertTriangle className="w-3.5 h-3.5 shrink-0 text-amber-600 dark:text-amber-400" />
+                <div className="p-3.5 rounded-xl bg-sky-50 dark:bg-sky-950/20 border border-sky-200 dark:border-sky-500/30 text-[11px] text-sky-900 dark:text-sky-200 space-y-1 transition-colors">
+                  <div className="flex items-center gap-1.5 font-bold text-sky-800 dark:text-sky-300">
+                    <AlertTriangle className="w-3.5 h-3.5 shrink-0 text-sky-600 dark:text-sky-400" />
                     <span>Asesoría Inmobiliaria & Transformación</span>
                   </div>
                   <p className="text-slate-700 dark:text-slate-300 leading-relaxed">
@@ -234,7 +244,7 @@ export const ConversionModal: React.FC<ConversionModalProps> = ({
                     required
                     value={formData.address}
                     onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                    placeholder="Ej. Calle Muntaner 142, Eixample, Barcelona"
+                    placeholder="Ej. Barcelona, Madrid o Valencia"
                     className="w-full px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-600 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-colors"
                   />
                 </div>
@@ -245,7 +255,7 @@ export const ConversionModal: React.FC<ConversionModalProps> = ({
                     rows={2}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    placeholder="¿Qué necesitas? (Ej. quiero comprar para reformar, o vender mi piso...)"
+                    placeholder="¿Qué necesitas? (Ej. comprar para reformar, vender mi piso...)"
                     className="w-full px-3.5 py-2 rounded-lg bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-600 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 transition-colors resize-none"
                   />
                 </div>

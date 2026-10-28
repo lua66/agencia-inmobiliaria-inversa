@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
@@ -7,15 +8,23 @@
   <!-- Página Principal / Inicio -->
   <url>
     <loc>https://ais-pre-jrxje44vozm2mzkpvzzmeh-14911313193.europe-west3.run.app/</loc>
-    <lastmod>2025-05-01</lastmod>
+    <lastmod>2026-10-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
-  <!-- Vender Vivienda & Valoración -->
+  <!-- Vender Vivienda -->
   <url>
     <loc>https://ais-pre-jrxje44vozm2mzkpvzzmeh-14911313193.europe-west3.run.app/vender</loc>
-    <lastmod>2025-05-01</lastmod>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Comprar Inmuebles -->
+  <url>
+    <loc>https://ais-pre-jrxje44vozm2mzkpvzzmeh-14911313193.europe-west3.run.app/comprar</loc>
+    <lastmod>2026-10-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -23,47 +32,71 @@
   <!-- Comprar para Reformar -->
   <url>
     <loc>https://ais-pre-jrxje44vozm2mzkpvzzmeh-14911313193.europe-west3.run.app/comprar-para-reformar</loc>
-    <lastmod>2025-05-01</lastmod>
+    <lastmod>2026-10-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
-  <!-- Calculadora de Valoración y Presupuesto de Reforma -->
+  <!-- Valoración Inmobiliaria Técnica In Situ -->
   <url>
-    <loc>https://ais-pre-jrxje44vozm2mzkpvzzmeh-14911313193.europe-west3.run.app/calculadora-presupuesto</loc>
-    <lastmod>2025-05-01</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://ais-pre-jrxje44vozm2mzkpvzzmeh-14911313193.europe-west3.run.app/valoracion-inmobiliaria</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+  </url>
+
+  <!-- Vender con Reforma Previa -->
+  <url>
+    <loc>https://ais-pre-jrxje44vozm2mzkpvzzmeh-14911313193.europe-west3.run.app/vender-con-reforma</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Vender sin Reforma -->
+  <url>
+    <loc>https://ais-pre-jrxje44vozm2mzkpvzzmeh-14911313193.europe-west3.run.app/vender-sin-reforma</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Informe Técnico Pre-Compra -->
+  <url>
+    <loc>https://ais-pre-jrxje44vozm2mzkpvzzmeh-14911313193.europe-west3.run.app/informe-tecnico-pre-compra</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Calculadora Reforma PRESTO -->
+  <url>
+    <loc>https://ais-pre-jrxje44vozm2mzkpvzzmeh-14911313193.europe-west3.run.app/calculadora-reforma-presto</loc>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 
   <!-- Proyectos & Casos de Éxito Antes/Después -->
   <url>
     <loc>https://ais-pre-jrxje44vozm2mzkpvzzmeh-14911313193.europe-west3.run.app/proyectos</loc>
-    <lastmod>2025-05-01</lastmod>
+    <lastmod>2026-10-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>
-
-  <!-- Red de Profesionales (Arquitectura, Interiorismo, Reformas) -->
-  <url>
-    <loc>https://ais-pre-jrxje44vozm2mzkpvzzmeh-14911313193.europe-west3.run.app/red-profesionales</loc>
-    <lastmod>2025-05-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
 
   <!-- Sobre Nosotros -->
   <url>
     <loc>https://ais-pre-jrxje44vozm2mzkpvzzmeh-14911313193.europe-west3.run.app/nosotros</loc>
-    <lastmod>2025-05-01</lastmod>
+    <lastmod>2026-10-28</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
+    <priority>0.7</priority>
   </url>
 
   <!-- Contacto & Asesoría -->
   <url>
     <loc>https://ais-pre-jrxje44vozm2mzkpvzzmeh-14911313193.europe-west3.run.app/contacto</loc>
-    <lastmod>2025-05-01</lastmod>
+    <lastmod>2026-10-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
